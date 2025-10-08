@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HelpingHands</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to top right, #FFDEE9, #B5FFFC);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 10;
+      animation: popIn 1s ease;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0D5791;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 2px solid #0D5791;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #0D5791;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0D5791;
+      transform: scale(1.05);
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .toggle a {
+      color: #0D5791;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 🎈 Background floating bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: float 8s infinite ease-in-out;
+      z-index: 1;
+    }
+
+    .bubble:nth-child(1) {
+      width: 60px; height: 60px;
+      top: 10%; left: 10%;
+      background: #f5a623;
+    }
+    .bubble:nth-child(2) {
+      width: 80px; height: 80px;
+      bottom: 20%; left: 30%;
+      background: #7ed6df;
+      animation-delay: 2s;
+    }
+    .bubble:nth-child(3) {
+      width: 40px; height: 40px;
+      top: 30%; right: 15%;
+      background: #e056fd;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-30px); }
+    }
+
+    /* 👧 Cartoon Character */
+    .cartoon-box {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.character {
+  width: 120px;
+  height: auto;
+  z-index: 2;
+}
+
+.speech {
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-left: 15px;
+  position: relative;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.speech::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 10px solid transparent;
+  border-right-color: #fff;
+}
+
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .speech {
+      position: absolute;
+      left: 10px;
+      top: -70px;
+      background: #fff;
+      border: 2px solid #0D5791;
+      padding: 10px;
+      border-radius: 10px;
+      width: 150px;
+      font-size: 14px;
+      box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+    }
+
+    .speech::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 20px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎈 Animated Background Bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <!-- 👧 Cartoon Character -->
+ <!-- 👧 Cartoon Character -->
+<div class="cartoon-box">
+  <img src="https://img.freepik.com/premium-psd/cute-cartoon-snake-with-magic-wand-transparent-background_1259066-3055.jpg?w=360" class="character" alt="Character">
+  <div class="speech">Hi! Please Login or Sign Up! 😊</div>
+</div>
+
+
+  <!-- 🔐 Signup/Login Box -->
+  <div class="container" id="formBox">
+    <h2 id="formTitle">Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="email" id="username" placeholder="Email Address">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="submitForm()">Login</button>
+    <div class="toggle">
+      Don't have an account? <a onclick="toggleForm()">Sign up here</a>
+    </div>
+  </div>
+
+  <!-- 🔁 JS to toggle forms -->
+  <script>
+    let isLogin = true;
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      const formTitle = document.getElementById("formTitle");
+      const button = document.querySelector("button");
+      const toggleText = document.querySelector(".toggle");
+
+      if (isLogin) {
+        formTitle.innerText = "Login";
+        button.innerText = "Login";
+        toggleText.innerHTML = `Don't have an account? <a onclick="toggleForm()">Sign up here</a>`;
+      } else {
+        formTitle.innerText = "Sign Up";
+        button.innerText = "Sign Up";
+        toggleText.innerHTML = `Already have an account? <a onclick="toggleForm()">Login here</a>`;
+      }
+    }
+
+    function submitForm() {
+      alert(isLogin ? "Logged in..." : "Signed up...");
+      // Add your backend logic here
+    }
+  </script>
+
+</body>
+</html>
